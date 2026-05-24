@@ -323,10 +323,49 @@ footer{
   color: var(--green-dark);
   font-weight: 700;
   font-size: 0.9rem;
+  display: block;
   transition: color 0.3s;
 }
 .form-section:hover .field-label {
   color: #fff;
+}
+/* Responsive 2-col grid: 1 col on mobile, 2 col on wider screens */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media(min-width:600px){
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+.form-input {
+  width: 100%;
+  border: 1.5px solid var(--green-mid);
+  padding: 11px 14px;
+  border-radius: 10px;
+  margin-top: 6px;
+  color: var(--black);
+  background: var(--surface);
+  outline: none;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: border-color 0.15s;
+}
+.form-input:focus {
+  border-color: var(--green);
+}
+.form-err {
+  color: #dc2626;
+  font-size: 0.78rem;
+  margin-top: 4px;
+  min-height: 16px;
 }
 </style>
 </head>
@@ -551,41 +590,41 @@ footer{
         <!-- SECTION 1: COMPANY & SPOC INFORMATION -->
         <div class="form-section">
           <h3 class="section-title">COMPANY &amp; SPOC INFORMATION</h3>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-            <div>
+          <div class="form-grid">
+            <div class="form-field">
               <label class="field-label">Company Name</label>
-              <input id="rf_companyName" type="text" placeholder="Enter company name" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'"/>
-              <p id="err_companyName" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <input id="rf_companyName" type="text" placeholder="Enter company name" class="form-input"/>
+              <p id="err_companyName" class="form-err"></p>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">SPOC Name</label>
-              <input id="rf_spocName" type="text" placeholder="Enter SPOC name" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'"/>
-              <p id="err_spocName" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <input id="rf_spocName" type="text" placeholder="Enter SPOC name" class="form-input"/>
+              <p id="err_spocName" class="form-err"></p>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">Contact Number</label>
-              <input id="rf_contactNumber" type="text" maxlength="10" placeholder="10-digit number" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'"/>
-              <p id="err_contactNumber" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <input id="rf_contactNumber" type="tel" maxlength="10" placeholder="Enter Your Contact Number" class="form-input"/>
+              <p id="err_contactNumber" class="form-err"></p>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">Email</label>
-              <input id="rf_email" type="email" placeholder="Enter email address" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'"/>
-              <p id="err_email" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <input id="rf_email" type="email" placeholder="Enter Your mail" class="form-input"/>
+              <p id="err_email" class="form-err"></p>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">State</label>
-              <select id="rf_state" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'">
+              <select id="rf_state" class="form-input">
                 <option value="">Select State</option>
                 <option value="Delhi">Delhi</option>
                 <option value="Haryana">Haryana</option>
                 <option value="Uttar Pradesh">Uttar Pradesh</option>
               </select>
-              <p id="err_state" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <p id="err_state" class="form-err"></p>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">Office Location</label>
-              <input id="rf_officeLocation" type="text" placeholder="Enter office location" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'"/>
-              <p id="err_officeLocation" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <input id="rf_officeLocation" type="text" placeholder="Enter office location" class="form-input"/>
+              <p id="err_officeLocation" class="form-err"></p>
             </div>
           </div>
         </div>
@@ -593,43 +632,43 @@ footer{
         <!-- SECTION 2: FLEET & DEMAND PLANNING -->
         <div class="form-section">
           <h3 class="section-title">FLEET &amp; DEMAND PLANNING</h3>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-            <div>
+          <div class="form-grid">
+            <div class="form-field">
               <label class="field-label">Total EV Cabs Required</label>
-              <input id="rf_totalEVCabs" type="text" placeholder="Numbers only" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'"/>
-              <p id="err_totalEVCabs" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <input id="rf_totalEVCabs" type="text" placeholder="Enter total number of EV cabs required" class="form-input"/>
+              <p id="err_totalEVCabs" class="form-err"></p>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">Number of Shifts</label>
-              <input id="rf_numberOfShifts" type="text" placeholder="Numbers only" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'"/>
-              <p id="err_numberOfShifts" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <input id="rf_numberOfShifts" type="text" placeholder="Enter The Number of Shifts" class="form-input"/>
+              <p id="err_numberOfShifts" class="form-err"></p>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">Shift Timing From</label>
-              <input id="rf_shiftFrom" type="time" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'"/>
+              <input id="rf_shiftFrom" type="time" class="form-input"/>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">Shift Timing To</label>
-              <input id="rf_shiftTo" type="time" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'"/>
+              <input id="rf_shiftTo" type="time" class="form-input"/>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">Working Days Per Week</label>
-              <select id="rf_workingDaysPerWeek" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'">
+              <select id="rf_workingDaysPerWeek" class="form-input">
                 <option value="">Select Working Days</option>
                 <option value="5">5 (Weekends excluded)</option>
                 <option value="7">7 (Weekends included)</option>
               </select>
-              <p id="err_workingDaysPerWeek" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <p id="err_workingDaysPerWeek" class="form-err"></p>
             </div>
-            <div>
+            <div class="form-field">
               <label class="field-label">Service Duration Period</label>
-              <select id="rf_serviceDurationPeriod" style="width:100%;border:1.5px solid var(--green-mid);padding:11px 14px;border-radius:10px;margin-top:6px;color:var(--black);background:var(--surface);outline:none;box-sizing:border-box;font-family:var(--font-body);font-size:0.9rem;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--green-mid)'">
+              <select id="rf_serviceDurationPeriod" class="form-input">
                 <option value="">Select Duration Period</option>
                 <option value="3 months">3 months</option>
                 <option value="6 months">6 months</option>
                 <option value="1+ year">1+ year</option>
               </select>
-              <p id="err_serviceDurationPeriod" style="color:#dc2626;font-size:0.78rem;margin-top:4px;min-height:16px;"></p>
+              <p id="err_serviceDurationPeriod" class="form-err"></p>
             </div>
           </div>
         </div>
