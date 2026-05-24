@@ -447,13 +447,12 @@ footer{
               <th style="padding:12px 16px;text-align:left;color:var(--green-dark);font-weight:700;">State</th>
               <th style="padding:12px 16px;text-align:left;color:var(--green-dark);font-weight:700;">EV Cabs</th>
               <th style="padding:12px 16px;text-align:left;color:var(--green-dark);font-weight:700;">Shifts</th>
-              <th style="padding:12px 16px;text-align:left;color:var(--green-dark);font-weight:700;">Shift Time</th>
               <th style="padding:12px 16px;text-align:left;color:var(--green-dark);font-weight:700;">Working Days</th>
               <th style="padding:12px 16px;text-align:left;color:var(--green-dark);font-weight:700;">Duration Period</th>
             </tr>
           </thead>
           <tbody id="dash-tbody">
-            <tr><td colspan="12" style="padding:40px;text-align:center;color:var(--grey);">Loading...</td></tr>
+            <tr><td colspan="11" style="padding:40px;text-align:center;color:var(--grey);">Loading...</td></tr>
           </tbody>
         </table>
       </div>
@@ -484,13 +483,13 @@ footer{
   }
   async function loadDashboardData(){
     const tbody=document.getElementById('dash-tbody');
-    tbody.innerHTML='<tr><td colspan="12" style="padding:40px;text-align:center;color:var(--grey);">Loading submissions...</td></tr>';
+    tbody.innerHTML='<tr><td colspan="11" style="padding:40px;text-align:center;color:var(--grey);">Loading submissions...</td></tr>';
     try{
       const res=await fetch("https://script.google.com/macros/s/AKfycbyQUlaLNknPF_NTkam1xgsIg8x_oHWm5NLC3o2herjDpAgptk-N2aNYRmZv6CP4LFsR/exec",{method:"GET"});
       const data=await res.json();
       renderDashboard(data);
     } catch(e){
-      tbody.innerHTML='<tr><td colspan="12" style="padding:40px;text-align:center;color:#dc2626;">Could not load data. Add a GET handler to your Apps Script that returns all rows as JSON.</td></tr>';
+      tbody.innerHTML='<tr><td colspan="11" style="padding:40px;text-align:center;color:#dc2626;">Could not load data. Add a GET handler to your Apps Script that returns all rows as JSON.</td></tr>';
     }
   }
   function renderDashboard(data){
@@ -504,7 +503,7 @@ footer{
     document.getElementById('stat-latest').innerText=rows.length?(rows[rows.length-1].companyName||'-'):'-';
     document.getElementById('dash-last-refreshed').innerText='Refreshed: '+new Date().toLocaleTimeString();
     if(!rows.length){
-      tbody.innerHTML='<tr><td colspan="12" style="padding:40px;text-align:center;color:var(--grey);">No submissions yet.</td></tr>';
+      tbody.innerHTML='<tr><td colspan="11" style="padding:40px;text-align:center;color:var(--grey);">No submissions yet.</td></tr>';
       return;
     }
     tbody.innerHTML=rows.map((r,i)=>`
@@ -518,7 +517,6 @@ footer{
         <td style="padding:12px 16px;">${r.state||'-'}</td>
         <td style="padding:12px 16px;text-align:center;font-weight:700;color:var(--green);">${r.totalEVCabs||'-'}</td>
         <td style="padding:12px 16px;text-align:center;">${r.numberOfShifts||'-'}</td>
-        <td style="padding:12px 16px;">${r.shiftFrom?r.shiftFrom:''}${r.shiftFrom&&r.shiftTo?' - ':''}${r.shiftTo?r.shiftTo:''}</td>
         <td style="padding:12px 16px;text-align:center;">${r.workingDaysPerWeek||'-'}</td>
         <td style="padding:12px 16px;">${r.serviceDurationPeriod||'-'}</td>
       </tr>`).join('');
@@ -644,14 +642,6 @@ footer{
               <p id="err_numberOfShifts" class="form-err"></p>
             </div>
             <div class="form-field">
-              <label class="field-label">Shift Timing From</label>
-              <input id="rf_shiftFrom" type="time" class="form-input"/>
-            </div>
-            <div class="form-field">
-              <label class="field-label">Shift Timing To</label>
-              <input id="rf_shiftTo" type="time" class="form-input"/>
-            </div>
-            <div class="form-field">
               <label class="field-label">Working Days Per Week</label>
               <select id="rf_workingDaysPerWeek" class="form-input">
                 <option value="">Select Working Days</option>
@@ -726,8 +716,6 @@ footer{
             officeLocation:         get('officeLocation'),
             totalEVCabs:            get('totalEVCabs'),
             numberOfShifts:         get('numberOfShifts'),
-            shiftFrom:              document.getElementById('rf_shiftFrom').value,
-            shiftTo:                document.getElementById('rf_shiftTo').value,
             workingDaysPerWeek:     get('workingDaysPerWeek'),
             serviceDurationPeriod:  get('serviceDurationPeriod'),
           };
